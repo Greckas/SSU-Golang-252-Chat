@@ -65,7 +65,7 @@ func checkLoginDataAndConnect(userName, password string) {
 	}
 	connection, _, err = websocket.DefaultDialer.Dial(connUrl.String(), nil)
 	if err != nil {
-		loger.Log.Errorf("Can not dial. %s", err)
+		loger.Log.Warningf("Can not dial. %s", err)
 		qmlLogin.LoginDataIsValid(false)
 		qmlStatus.SendStatus("Loging failed")
 		return
@@ -77,7 +77,7 @@ func checkLoginDataAndConnect(userName, password string) {
 		UserName: "",
 		Token:    "",
 	}
-	newMessageBody := messageService.User{
+	newMessageBody := messageService.Authentification{
 		UserName: userName,
 		NickName: "",
 		Password: password,
@@ -114,9 +114,14 @@ func logOut() {
 	err := connection.Close()
 	if err != nil {
 		loger.Log.Warningf("Can not close connection. %s", err)
-		qmlStatus.SendStatus("Can not log out")
-		qmlLogin.LogOutIsSuccessfull(false)
-		return
+		//if it`s not already closed - we have no idea what happened
+		if !websocket.IsCloseError(err, websocket.CloseNormalClosure, websocket.CloseAbnormalClosure) {
+			qmlStatus.SendStatus("Can not log out")
+			qmlLogin.LogOutIsSuccessfull(false)
+			return
+		}
+		//if it`s closed, error spawns, but connection in stay we want
+		//so just signal UI to change window
 	}
 	loger.Log.Info("Connection closed")
 	qmlLogin.LogOutIsSuccessfull(true)

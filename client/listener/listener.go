@@ -28,6 +28,10 @@ func ListenToServer(conn *websocket.Conn) {
 		}
 		ValidateAndRedirectMessage(unmarshaledMessage)
 	}
+	//when we get connection error, this code executes
+	//also when we close connection from another part of application
+	//so for close channels enough to close connection
+	close(QuitChannel)
 }
 
 func ValidateAndRedirectMessage(message *messageService.Message) {
