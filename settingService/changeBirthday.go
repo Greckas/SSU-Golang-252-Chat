@@ -2,10 +2,11 @@ package settingService
 
 import (
 	"encoding/json"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
 	"errors"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/database"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/database"
+	"os/user"
 )
 
 // ChangeBirthdayRequestBody is a custom body for ChangeBirthdayRequest
@@ -22,7 +23,7 @@ func UnmarshalChangeBirthdayRequestBody(request *messageService.Message) (int, e
 	err := json.Unmarshal(request.Body, &body)
 	if err != nil {
 		loger.Log.Errorf("Error has occurred: ", err)
-		return nil, err
+		return 0, err
 	}
 	birthday := body.Birthday
 	return birthday, nil
@@ -47,6 +48,7 @@ func ChangeBirthday(request *messageService.Message) (bool, error) {
 		loger.Log.Errorf("DB error has occurred: ", err)
 		return false, err
 	}
+	User, err := user.Current()
 	// UPDATE users SET birthday = "birthday value from request body"
 	// WHERE user_name = "userName value from request header"
 	db.Model(&User).Where("user_name = ?", userName).Update("birthday", birthday)

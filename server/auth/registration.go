@@ -5,9 +5,9 @@ import (
 
 	"errors"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/database"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/database"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 

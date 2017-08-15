@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"sync"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
 )
 
 type Server struct {
@@ -15,7 +15,7 @@ type Server struct {
 
 type MessageType struct {
 	Message  string `json:"message"`
-	Auth     string `json:"authorization"`
+	Auth     string `json:"auth"`
 	Contacts string `json:"contacts"`
 	Settings string `json:"settings"`
 }
@@ -26,8 +26,8 @@ type MessageCommand struct {
 	MessageSent          string `json:"messagesent"`
 	MessageWasntSent     string `json:"messagewasntsent"`
 	SendLoginData        string `json:"sendlogindata"`
-	LoginIsSucc          string `json:"authissucc"`
-	LoginIsNotSucc       string `json:"authisnotsucc"`
+	LoginIsSucc          string `json:"loginissucc"`
+	LoginIsNotSucc       string `json:"loginisnotsucc"`
 	SendRegisterData     string `json:"sendregisterdata"`
 	RegisterIsSucc       string `json:"registerissucc"`
 	RegisterIsNotSucc    string `json:"registerisnotsucc"`

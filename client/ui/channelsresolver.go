@@ -3,12 +3,12 @@ package ui
 import (
 	"encoding/json"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/config"
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/contacts"
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/listener"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/userinfo"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/config"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/contacts"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/listener"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/userinfo"
 )
 
 func channelsResolver() {
@@ -17,6 +17,7 @@ func channelsResolver() {
 		case <-listener.QuitChannel:
 			return
 		case msg := <-listener.AuthorizationChannel:
+			loger.Log.Infof("listener %s type", msg.Header.Command)
 			switch msg.Header.Command {
 			case config.GetConfig().MessageCommand.LoginIsSucc:
 				loginIsSuccessfully(msg)

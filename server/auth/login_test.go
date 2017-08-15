@@ -11,8 +11,8 @@ import (
 
 	"net/url"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/customers"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/customers"
 )
 
 func TestLogin(t *testing.T) {
@@ -33,7 +33,7 @@ var (
 	CurrentTime = 1500373713
 	Token       = "333"
 	Text        = "msg from user 1 to user 2"
-	header      = messageService.MessageHeader{Type_: "auth", Command: "authissucc", UserName: UserName, Token: Token}
+	header      = messageService.MessageHeader{Type_: "auth", Command: "loginissucc", UserName: UserName, Token: Token}
 
 	body = messageService.Authentification{UserName: UserName, Password: Password, NickName: NickName}
 	addr = flag.String("addr", "localhost:3006", "http service address")

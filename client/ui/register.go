@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/config"
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/listener"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/config"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/listener"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
 	"github.com/gorilla/websocket"
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/quick"
@@ -26,9 +26,11 @@ type QmlRegister struct {
 
 //initialize QmlRegister and its slots
 func initQmlRegister(quickWidget *quick.QQuickWidget) {
+
 	qmlRegister = NewQmlRegister(nil)
 	quickWidget.RootContext().SetContextProperty("qmlRegister", qmlRegister)
 	qmlRegister.ConnectCheckRegisterData(func(userName, nickName, password string) {
+
 		if userName == "" || nickName == "" || password == "" {
 			loger.Log.Info("Register failed. userName and/or nickName and/or password field are empty")
 			qmlStatus.SendStatus("Please, fill all fields.")

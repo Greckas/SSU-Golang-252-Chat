@@ -1,9 +1,9 @@
 package listener
 
 import (
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/config"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/config"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
 	"github.com/gorilla/websocket"
 )
 
@@ -35,6 +35,7 @@ func ListenToServer(conn *websocket.Conn) {
 }
 
 func ValidateAndRedirectMessage(message *messageService.Message) {
+	loger.Log.Infof("kdfsd %s", message.Header.Type_)
 	switch message.Header.Type_ {
 	case config.GetConfig().MessageType.Message:
 		MessageChannel <- *message

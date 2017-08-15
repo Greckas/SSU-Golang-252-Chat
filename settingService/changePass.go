@@ -2,10 +2,12 @@ package settingService
 
 import (
 	"encoding/json"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
 	"errors"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/database"
+	"os/user"
+
+	"github.com/Greckas/SSU-Golang-252-Chat/database"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
 )
 
 // ChangePassRequestBody is a custom body for ChangePassRequest
@@ -73,6 +75,7 @@ func ChangePass(request *messageService.Message) (bool, error) {
 		loger.Log.Warnf(" Password is the same as old")
 		return false, nil
 	}
+	User, err := user.Current()
 	// UPDATE users SET password = "newPass value from request body"
 	// WHERE user_name = "userName value from request header"
 	db.Model(&User).Where("user_name = ?", userName).Update("password", newPass)

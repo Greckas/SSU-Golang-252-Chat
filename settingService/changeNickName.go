@@ -2,11 +2,13 @@ package settingService
 
 import (
 	"encoding/json"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
 	"errors"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/database"
 
+	"github.com/Greckas/SSU-Golang-252-Chat/database"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+
+	"os/user"
 )
 
 // ChangeNickNameRequestBody is a custom body for ChangeNickNameRequest
@@ -53,6 +55,7 @@ func ChangeNickName(request *messageService.Message) (bool, error) {
 		loger.Log.Errorf("DB error has occurred: ", err)
 		return false, err
 	}
+	User, err := user.Current()
 	// UPDATE users SET nick_name = "nickName value from request body"
 	// WHERE user_name = "userName value from request header"
 	db.Model(&User).Where("user_name = ?", userName).Update("nick_name", nickName)

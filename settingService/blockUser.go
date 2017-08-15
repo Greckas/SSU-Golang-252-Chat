@@ -3,10 +3,11 @@ package settingService
 import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"encoding/json"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
 	"errors"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/database"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/database"
+	"os/user"
 )
 
 // BlockUserRequestBody is a custom body for BlockUserRequest
@@ -25,13 +26,13 @@ func UnmarshalBlockUserRequestBody(request *messageService.Message) (*BlockUserR
 	err := json.Unmarshal(request.Body, &body)
 	if err != nil {
 		loger.Log.Errorf("Error has occurred: ", err)
-		return nil, nil, err
+		return nil, 0, err
 	}
 	IsBlocked := body.IsBlocked // IsBlocked value could be int 0 or 1
 	if IsBlocked != 0 && IsBlocked != 1 {
 		err := errors.New("IsBlocked value is not valid. IsBlocked = " + string(IsBlocked))
 		loger.Log.Errorf("IsBlocked value is not 1 or 0:", err)
-		return nil, nil, err
+		return nil, 0, err
 	}
 	return body, IsBlocked, nil
 }
@@ -57,6 +58,7 @@ func BlockUnblockUser(request *messageService.Message) (bool, error) {
 		loger.Log.Errorf("DB error has occurred: ", err)
 		return false, err
 	}
+	Contact, err := user.Current()
 	// UPDATE contacts SET IsBlocked = "IsBlocked value from request body"
 	// WHERE main_user = "mainUser value from request body"
 	// AND  contact_user = "contactUser value from request body"
@@ -84,7 +86,7 @@ func IsUserBlocked(request *messageService.Message) (isBlocked bool, err error) 
 	err = json.Unmarshal(request.Body, &body)
 	if err != nil {
 		loger.Log.Errorf("Error has occurred: ", err)
-		return nil, err
+		return false, err
 	}
 	mainUser := body.ReceiverName
 	contactUser := request.Header.UserName

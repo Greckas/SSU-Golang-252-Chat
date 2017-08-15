@@ -3,11 +3,13 @@ package core
 import (
 	"net/http"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/config"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/message"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/modules"
+	"fmt"
+
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/config"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/message"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/modules"
 	"github.com/gorilla/websocket"
 )
 
@@ -45,7 +47,8 @@ func MessageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func validateMessage(message *messageService.Message, messageType int, conn *websocket.Conn) {
-
+	fmt.Println(message.Header.Type_)
+	fmt.Println("message.Header.Type_")
 	switch message.Header.Type_ {
 	case coremessage.EmptyType:
 		modules.EmptyType()
@@ -70,6 +73,7 @@ func validateMessage(message *messageService.Message, messageType int, conn *web
 		default:
 			loger.Log.Warnf("Command does not exist")
 		}
+
 	}
 
 }

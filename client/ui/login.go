@@ -6,11 +6,11 @@ import (
 
 	"encoding/json"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/config"
-	"github.com/8tomat8/SSU-Golang-252-Chat/client/listener"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/userinfo"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/config"
+	"github.com/Greckas/SSU-Golang-252-Chat/client/listener"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/userinfo"
 	"github.com/gorilla/websocket"
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/quick"

@@ -3,12 +3,12 @@ package modules
 import (
 	"encoding/json"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/auth"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/customers"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/message"
-	"github.com/8tomat8/SSU-Golang-252-Chat/settingService"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/auth"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/customers"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/message"
+	"github.com/Greckas/SSU-Golang-252-Chat/settingService"
 	"github.com/gorilla/websocket"
 )
 
@@ -30,14 +30,14 @@ func Message(message *messageService.Message, messageType int, conn *websocket.C
 		return
 	}
 
-	err = coremessage.SendMessage(message, messageType)
-	byteError, er := json.Marshal(err)
+	fine := coremessage.SendMessage(message, messageType)
+	byteError, er := json.Marshal(fine)
 
 	if er != nil {
 		loger.Log.Errorf("Marshal Error Message")
 	}
 
-	if err.Header.Command != "Ok" {
+	if fine.Header.Command != "Ok" {
 		err := conn.WriteMessage(messageType, byteError)
 
 		if err != nil {
@@ -66,8 +66,8 @@ func Register(message *messageService.Message, conn *websocket.Conn) {
 		return
 	}
 	newMessageHeader := messageService.MessageHeader{
-		Type_:    "authorization",
-		Command:  "registrissucc",
+		Type_:    coremessage.AuthType,
+		Command:  "registerissucc",
 		UserName: us.UserName,
 		Token:    tok,
 	}
@@ -108,8 +108,8 @@ func Auth(message *messageService.Message, conn *websocket.Conn) {
 		return
 	}
 	newMessageHeader := messageService.MessageHeader{
-		Type_:    "authorization",
-		Command:  "authissucc",
+		Type_:    coremessage.AuthType,
+		Command:  "loginissucc",
 		UserName: us.UserName,
 		Token:    tok,
 	}

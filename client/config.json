@@ -5,7 +5,7 @@
   },
   "messagetype": {
     "message":        "message",
-    "authorization":  "authorization",
+    "auth":           "auth",
     "contacts":       "contact",
     "settings":       "setting"
   },
