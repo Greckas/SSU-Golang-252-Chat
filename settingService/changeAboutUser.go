@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 
-	"os/user"
-
 	"github.com/Greckas/SSU-Golang-252-Chat/database"
 	"github.com/Greckas/SSU-Golang-252-Chat/loger"
 	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
@@ -60,7 +58,6 @@ func ChangeAboutUserInfo(request *messageService.Message) (bool, error) {
 		loger.Log.Errorf("DB error has occurred: ", err)
 		return false, err
 	}
-	User, err := user.Current()
 	// UPDATE users SET about_user = "aboutUser value from request body"
 	// WHERE user_name = "userName value from request header"
 	//db.Model(&User).Where("user_name = ?", userName).Update("about_user", aboutUser)

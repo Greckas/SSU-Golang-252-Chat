@@ -17,7 +17,6 @@ func channelsResolver() {
 		case <-listener.QuitChannel:
 			return
 		case msg := <-listener.AuthorizationChannel:
-			loger.Log.Infof("listener %s type", msg.Header.Command)
 			switch msg.Header.Command {
 			case config.GetConfig().MessageCommand.LoginIsSucc:
 				loginIsSuccessfully(msg)
@@ -55,7 +54,7 @@ func loginIsSuccessfully(message messageService.Message) {
 	listener.ContactsChannel = make(chan messageService.Message)
 	//save received username and token
 	userinfo.CurrentUserInfo.UserName = message.Header.UserName
-	userinfo.CurrentUserInfo.UserName = message.Header.Token
+	userinfo.CurrentUserInfo.Token = message.Header.Token
 	//now we just inform UI that login was successfully
 	loger.Log.Infof("User %s login successfully.", message.Header.UserName)
 	qmlLogin.LoginDataIsValid(true)

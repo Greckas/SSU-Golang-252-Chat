@@ -3,12 +3,12 @@ package modules
 import (
 	"encoding/json"
 
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/auth"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/customers"
-	"github.com/8tomat8/SSU-Golang-252-Chat/server/message"
-	"github.com/8tomat8/SSU-Golang-252-Chat/settingService"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/auth"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/customers"
+	"github.com/Greckas/SSU-Golang-252-Chat/server/message"
+	"github.com/Greckas/SSU-Golang-252-Chat/settingService"
 	"github.com/gorilla/websocket"
 )
 
@@ -66,7 +66,7 @@ func Register(message *messageService.Message, conn *websocket.Conn) {
 		return
 	}
 	newMessageHeader := messageService.MessageHeader{
-		Type_:    "authorization",
+		Type_:    coremessage.RegisterType,
 		Command:  "registrissucc",
 		UserName: us.UserName,
 		Token:    tok,
@@ -108,8 +108,8 @@ func Auth(message *messageService.Message, conn *websocket.Conn) {
 		return
 	}
 	newMessageHeader := messageService.MessageHeader{
-		Type_:    "authorization",
-		Command:  "authissucc",
+		Type_:    coremessage.AuthType,
+		Command:  "loginissucc",
 		UserName: us.UserName,
 		Token:    tok,
 	}

@@ -3,10 +3,10 @@ package settingService
 import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"encoding/json"
-	"github.com/8tomat8/SSU-Golang-252-Chat/loger"
+	"github.com/Greckas/SSU-Golang-252-Chat/loger"
 	"errors"
-	"github.com/8tomat8/SSU-Golang-252-Chat/messageService"
-	"github.com/8tomat8/SSU-Golang-252-Chat/database"
+	"github.com/Greckas/SSU-Golang-252-Chat/messageService"
+	"github.com/Greckas/SSU-Golang-252-Chat/database"
 )
 
 // BlockUserRequestBody is a custom body for BlockUserRequest

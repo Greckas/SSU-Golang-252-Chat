@@ -3,7 +3,6 @@ package settingService
 import (
 	"encoding/json"
 	"errors"
-	"os/user"
 
 	"github.com/Greckas/SSU-Golang-252-Chat/database"
 	"github.com/Greckas/SSU-Golang-252-Chat/loger"
@@ -75,7 +74,6 @@ func ChangePass(request *messageService.Message) (bool, error) {
 		loger.Log.Warnf(" Password is the same as old")
 		return false, nil
 	}
-	User, err := user.Current()
 	// UPDATE users SET password = "newPass value from request body"
 	// WHERE user_name = "userName value from request header"
 	//db.Model(&User).Where("user_name = ?", userName).Update("password", newPass)
